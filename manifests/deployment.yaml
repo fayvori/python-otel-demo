@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-otel
+  labels:
+    app: flask-otel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-otel
+  template:
+    metadata:
+      labels:
+        app: flask-otel
+    spec:
+      containers:
+        - name: flask-otel
+          image: fayvori/open-telemetry-demo:1.0
+          env:
+            - name: JAEGER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-otel-cm
+                  key: JAEGER_HOST
+
+            - name: JAEGER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-otel-cm
+                  key: JAEGER_PORT
+          ports:
+            - containerPort: 80

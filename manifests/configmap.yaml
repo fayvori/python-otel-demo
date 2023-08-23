@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flask-otel-cm
+data:
+  JAEGER_HOST: jaeger-agent.default.svc.cluster.local
+  JAEGER_PORT: "6831"

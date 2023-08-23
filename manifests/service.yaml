@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-otel-service
+spec:
+  selector:
+    app: flask-otel
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
